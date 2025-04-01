@@ -10,6 +10,7 @@ export const loginService = async ({ email, password }) => {
       email: email,
       password: password,
     }),
+   
   });
   const data = await res.json();
   if (!data) {

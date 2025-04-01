@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { loginService } from "./service/auth-service";
 
-export const { handlers, auth, signOut, signIn } = NextAuth({
+export const { auth, signOut, signIn } = NextAuth({
   providers: [
     Credentials({
       credentials: {

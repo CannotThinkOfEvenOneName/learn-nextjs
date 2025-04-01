@@ -1,11 +1,17 @@
 "use client";
 
 import { loginAction } from "@/actions/auth-action";
+import { useActionState } from "react";
 
 export default function LoginForm() {
+  const [state, formAction, isPending] = useActionState(loginAction, null);
+
+  console.log("state ", state);
+
+
   return (
     <form
-      action={loginAction}
+      action={formAction}
       className="rounded-[20px] w-80 p-8 bg-[#310D84]"
       style={{ boxShadow: "-6px 3px 20px 4px #0000007d" }}
     >
@@ -31,15 +37,16 @@ export default function LoginForm() {
       </div>
       <div className="flex justify-center mb-4">
         <button
+          disabled={isPending}
           type="submit"
           className="h-10 w-full cursor-pointer text-white rounded-md bg-gradient-to-br from-[#7336FF] to-[#3269FF] shadow-md shadow-blue-950"
         >
-          Sign In
+          {isPending ? "Signing in..." : "Sign In"}
         </button>
       </div>
       <div className="text-gray-300 text-center">
         Don't have an account?
-        <span className="text-[#228CE0] cursor-pointer">Sign up</span>
+        <span className="text-[#228CE0] cursor-pointer">&nbsp;Sign up</span>
       </div>
     </form>
   );

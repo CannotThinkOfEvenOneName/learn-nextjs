@@ -1,9 +1,9 @@
 "use server";
 
-import { signIn } from "@/auth";
+import { signIn, signOut } from "@/auth";
 import { redirect } from "next/navigation";
 
-export const loginAction = async (formData) => {
+export const loginAction = async (_, formData) => {
   const email = formData.get("email");
   const password = formData.get("password");
 
@@ -13,4 +13,8 @@ export const loginAction = async (formData) => {
     redirect: false,
   });
   redirect("/");
+};
+
+export const signOutAction = async () => {
+  await signOut();
 };

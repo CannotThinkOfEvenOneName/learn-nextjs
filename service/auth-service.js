@@ -1,21 +1,15 @@
+import { apiRequest } from "@/utils/api";
 import { redirect } from "next/navigation";
 
-export const loginService = async ({ email, password }) => {
-  const res = await fetch(`http://localhost:8080/api/v1/auths/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
+export async function loginService({ email, password }) {
+  try {
+    const res = await apiRequest("/api/v1/auths/login", "POST", {
       email: email,
       password: password,
-    }),
-   
-  });
-  const data = await res.json();
-  if (!data) {
-    redirect("/login");
-  }
-  return data;
-};
-
+    });
+    if (!res) {
+      redirect("/login");
+    }
+    return res;
+  } catch (e) {}
+}

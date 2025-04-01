@@ -21,12 +21,22 @@ export default function LoginForm() {
             placeholder="Email address"
             className="bg-[#8777BA] w-full p-2.5 rounded-md placeholder:text-gray-300 shadow-md shadow-blue-950"
           />
+          {state?.email && (
+            <p className="text-tiny text-red-500">
+              {state?.email?._errors?.[0]}
+            </p>
+          )}
           <input
             name="password"
             type="text"
             placeholder="Password"
             className="bg-[#8777BA] w-full p-2.5 rounded-md placeholder:text-gray-300 shadow-md shadow-blue-950"
           />
+               {state?.password && (
+            <p className="text-tiny text-red-500">
+              {state?.password?._errors?.[0]}
+            </p>
+          )}
         </div>
         <div className="mb-4">
           <span className="text-[#228CE0] text-[10px] ml-2 cursor-pointer">

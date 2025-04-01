@@ -18,3 +18,4 @@ export const loginService = async ({ email, password }) => {
   }
   return data;
 };
+

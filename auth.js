@@ -1,10 +1,12 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { loginService } from "./service/auth-service";
+import Google from "next-auth/providers/google";
 
-export const { auth, signOut, signIn } = NextAuth({
+export const { auth, signOut, signIn, handlers } = NextAuth({
   providers: [
     Credentials({
+      name: "credentials",
       credentials: {
         email: {},
         password: {},
@@ -15,9 +17,23 @@ export const { auth, signOut, signIn } = NextAuth({
         return res;
       },
     }),
+    Google({
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
+    }),
   ],
   callbacks: {
     async jwt(token) {
+      if (token?.account?.provider === "google") {
+        console.log("token in login with google ", token);
+
+        console.log("Login with google ");
+      }
       return token;
     },
     async session(props) {

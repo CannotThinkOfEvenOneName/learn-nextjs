@@ -19,3 +19,9 @@ export const loginAction = async (_, formData) => {
 export const signOutAction = async () => {
   await signOut();
 };
+
+export const signInWithGoogle = async () => {
+  await signIn("google", {
+    callbackUrl: "/",
+  });
+};

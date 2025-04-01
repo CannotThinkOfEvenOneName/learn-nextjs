@@ -5,6 +5,18 @@ export async function getAllCategories() {
   const token = await getAuthToken();
   const res = await apiRequest("/api/v1/categories", "GET", null, token, {
     cache: "force-cache",
-  });  
+  });
+  return res;
+}
+
+export async function deleteCategoryService(categoryId) {
+  const token = await getAuthToken();
+  const res = await apiRequest(
+    `/api/v1/categories/${categoryId}`,
+    "DELETE",
+    null,
+    token
+  );
+  console.log(res);
   return res;
 }
